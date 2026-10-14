@@ -106,8 +106,9 @@ static class McpBridgeForce
                     {
                         bool started = (bool)startServer.Invoke(server, new object[] { true });
                         Debug.Log($"[McpBridgeForce] StartLocalHttpServer: {started}");
-                        if (!started) return; // retry next tick
                     }
+                    // Server just launched — wait for it to boot before connecting the bridge
+                    return;
                 }
             }
 
