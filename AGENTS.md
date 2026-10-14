@@ -1,6 +1,6 @@
 # Agent Guide
 
-Injectable coding assistant layer for Unity/C# projects. Provides enforcement rules, skills, and auto-generated project-specific docs.
+Injectable coding assistant layer for Unity/C# projects. Provides enforcement rules and auto-generated project-specific docs.
 
 ## Agent Rules
 
@@ -13,6 +13,7 @@ Injectable coding assistant layer for Unity/C# projects. Provides enforcement ru
 7. **Fix adjacent enforcement violations.** When working near code that violates enforcement rules, fix the violations if safe and obvious.
 8. **No git operations.** All work is local. No commits, no branches, no PRs.
 9. **When in doubt, throw an error** rather than degrade silently.
+10. **Bug fixes are not refactoring opportunities.** Fix the root cause with minimal changes. No new classes, file renames, or architectural restructuring during a bug fix. Enforcement violation fixes near the bug are the only exception.
 
 ## Docs
 
@@ -35,18 +36,9 @@ Non-negotiable rules checked after code is written. Violations must be fixed bef
 - [solid.md](enforcement/solid.md)
 - [serialized-field-rename.md](enforcement/serialized-field-rename.md)
 - [test-coverage.md](enforcement/test-coverage.md)
+- [scope-discipline.md](enforcement/scope-discipline.md)
+- [state-safety.md](enforcement/state-safety.md)
 
-## Memory
+## Code Review
 
-Cross-session learning in [memory/](memory/). Read at session start, write after completing work. Knowledge compounds across sessions.
-
-## Skills
-
-| Command | Purpose |
-|---|---|
-| `/implement-feature` | Plan → TDD → verify → cleanup → retrospective |
-| `/fix-bug` | Reproduce → root cause → test → fix → verify |
-| `/create-tests` | Generate EditMode/PlayMode tests for existing code |
-| `/deslop` | Code cleanup: naming, dead code, simplification |
-| `/garden` | Entropy scan: docs freshness, test gaps, unused code |
-| `/retrospective` | Post-implementation learning capture to memory/ |
+Use `/code-review` after implementation to get a fresh-context review against all enforcement rules. Every rule in `enforcement/` is a hard gate — violations must be fixed.

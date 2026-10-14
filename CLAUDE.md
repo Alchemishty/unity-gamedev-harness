@@ -1,6 +1,6 @@
 # Unity Game Dev Agent Harness
 
-Injectable coding assistant layer for Unity/C# projects. Provides enforcement rules, skills, and project-specific docs generated from the actual codebase.
+Injectable coding assistant layer for Unity/C# projects. Provides enforcement rules and project-specific docs generated from the actual codebase.
 
 ## Quick Reference
 
@@ -10,7 +10,6 @@ Injectable coding assistant layer for Unity/C# projects. Provides enforcement ru
 - **Domain:** `docs/domain.md` — domain model, networking rules, API contracts
 - **Testing:** `docs/testing.md` — test strategy, patterns, coverage priorities
 - **Enforcement:** `enforcement/` — non-negotiable rules checked after writing code
-- **Memory:** `memory/` — cross-session learning, read at session start
 
 ## Non-Negotiable Rules
 
@@ -22,14 +21,17 @@ Injectable coding assistant layer for Unity/C# projects. Provides enforcement ru
 6. All work is local — no git operations, no commits, no PRs
 7. Read `docs/` before making changes — understand the project's architecture first
 
-## Commands
+## Unity MCP Tools
 
-- `/implement-feature` — plan → TDD → verify → cleanup → retrospective
-- `/fix-bug` — reproduce → root cause → test → fix → verify
-- `/create-tests` — generate EditMode/PlayMode tests for existing code
-- `/deslop` — code cleanup
-- `/garden` — entropy scan and maintenance
-- `/retrospective` — capture learnings to memory
+You have access to a live Unity editor via MCP tools. Use them:
+- After writing/modifying .cs files, use `refresh_unity` to trigger recompilation
+- Use `read_console` to check for compilation errors — fix all errors before proceeding
+- Use `run_tests` to run EditMode and PlayMode tests
+- If MCP tools fail after a domain reload, wait 10 seconds and retry — the bridge reconnects automatically
+
+## Code Review
+
+When reviewing code (or when `/code-review` is invoked), check the diff against every file in `enforcement/`. Each rule is a hard gate — violations must be fixed before the change is complete.
 
 ## Setup
 
