@@ -119,7 +119,7 @@ while true; do
     fi
 
     # Detect MCP bridge connected
-    if $COMPILED && grep -q "Session connected" "$UNITY_LOG" 2>/dev/null; then
+    if $COMPILED && grep -q "Session connected\|Registered with session" "$UNITY_LOG" 2>/dev/null; then
         echo "[unity-agent] MCP bridge connected after ${ELAPSED}s."
         break
     fi
